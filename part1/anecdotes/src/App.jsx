@@ -14,18 +14,44 @@ const App = () => {
   ];
 
   const [selected, setSelected] = useState(0);
+  const [votes, setVotes] = useState(Array(8).fill(0));
 
   const randomAnecdotes = () => {
     const randomIndex = Math.floor(Math.random() * anecdotes.length);
     setSelected(randomIndex);
-    console.log(setSelected);
   };
+
+  const chooseVotes = () => {
+    const copy = [...votes];
+    copy[selected] += 1;
+    setVotes(copy);
+  };
+
+  const maxIndex = votes.indexOf(Math.max(...votes));
+  const maxVotes = Math.max(...votes);
 
   return (
     <div>
-      <div>{anecdotes[selected]}</div>
+      <div>
+        {anecdotes[selected]}
+        <p>has {votes[selected]} votes</p>
 
-      <Button onClick={randomAnecdotes} text="next anecdote" />
+        <Button onClick={chooseVotes} text="vote" />
+
+        <Button onClick={randomAnecdotes} text="next anecdote" />
+      </div>
+
+      <div>
+        <h2>Anecdote with most votes</h2>
+        {Math.max(...votes) === 0 ? (
+          "no votes anecdotes"
+        ) : (
+          <p>
+            {anecdotes[maxIndex]}
+            <br /> has {maxVotes} votes{" "}
+          </p>
+        )}
+      </div>
     </div>
   );
 };
