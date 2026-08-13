@@ -6,7 +6,7 @@ const Course = ({course}) => {
   return (
     <div>
 
-      <Header course={course} />
+      <Header courses={course} />
       <Content parts={course.parts} />
       <Total parts={course.parts} />
     </div>

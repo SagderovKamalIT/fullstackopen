@@ -1,12 +1,13 @@
-const Total = ({parts}) => {
-
+const Total = ({ parts }) => {
   return (
     <p>
-      {`total of 
+      <strong>
+        {`total of 
       ${parts.reduce((sum, item) => sum + item.exercises, 0)}
       exercises`}
+      </strong>
     </p>
-  )
-}
+  );
+};
 
 export default Total;
