@@ -5,14 +5,6 @@ const App = () => {
   const [persons, setPersons] = useState([{ name: "Arto Hellas" }]);
   const [newName, setNewName] = useState("");
 
-  // 1. Пользователь печатает значение в полее ввода
-  // 2. Пользователь нажимает на кнопку (add) - срабатывает обработчик события
-  // 3. Обоаботчик события добавляет имя из поля ввода в массив значений/имен
-  // 4. Значение переноситься с обоаботчика в массив и сохраняется
-
-  // 5. Срабатывает обоаботчик события, отвечающий за отрисовку массива
-  // 6. происходит отрисовка и пользователь видет на экране новое имя
-
   const addNewName = (event) => {
     event.preventDefault();
 
@@ -20,8 +12,15 @@ const App = () => {
       name: newName,
       id: String(persons.length + 1),
     };
-    setPersons(persons.concat(newPerson));
-    setNewName("");
+
+    const hasName = persons.some((person) => person.name === newName);
+
+    if (hasName === true) {
+      alert(`${newName} is already added to phonebook`);
+    } else {
+      setPersons(persons.concat(newPerson));
+      setNewName("");
+    }
   };
 
   const handleChangeName = (event) => {
